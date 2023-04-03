@@ -9,10 +9,10 @@
 #include <WebServer.h>
 
 // SSID & Password
-const char* ssid = "***";  // Enter your SSID here
-const char* password = "***";  //Enter your Password here
+const char *ssid = "***";     // Enter your SSID here
+const char *password = "***"; // Enter your Password here
 
-WebServer server(80);  // Object of WebServer(HTTP port, 80 is defult)
+WebServer server(80); // Object of WebServer(HTTP port, 80 is defult)
 
 // HTML & CSS contents which display on web server
 String HTML = "<!DOCTYPE html>\
@@ -23,11 +23,13 @@ String HTML = "<!DOCTYPE html>\
 </html>";
 
 // Handle root url (/)
-void handle_root() {
+void handle_root()
+{
   server.send(200, "text/html", HTML);
 }
 
-void setup() {
+void setup()
+{
   Serial.begin(115200);
   Serial.println("Try Connecting to ");
   Serial.println(ssid);
@@ -36,14 +38,15 @@ void setup() {
   WiFi.begin(ssid, password);
 
   // Check wi-fi is connected to wi-fi network
-  while (WiFi.status() != WL_CONNECTED) {
-  delay(1000);
-  Serial.print(".");
+  while (WiFi.status() != WL_CONNECTED)
+  {
+    delay(1000);
+    Serial.print(".");
   }
   Serial.println("");
   Serial.println("WiFi connected successfully");
   Serial.print("Got IP: ");
-  Serial.println(WiFi.localIP());  //Show ESP32 IP on serial
+  Serial.println(WiFi.localIP()); // Show ESP32 IP on serial
 
   server.on("/", handle_root);
 
@@ -52,6 +55,7 @@ void setup() {
   delay(100);
 }
 
-void loop() {
+void loop()
+{
   server.handleClient();
 }
